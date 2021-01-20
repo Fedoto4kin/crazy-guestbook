@@ -8,8 +8,6 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Comment;
 
-
-
 /**
  * Site controller
  */
@@ -72,7 +70,7 @@ class SiteController extends Controller
 
     public function actionDelete($id)
     {
-         $model = Comment::findOne($id);
+        $model = Comment::findOne($id);
 
         if ($model->delete()) {
             return $this->goHome();
@@ -119,7 +117,6 @@ class SiteController extends Controller
 
     public function actionView($id)
     {
-
         $model = Comment::findOne($id);
         return $this->renderPartial(
             'comment/_commentrow',

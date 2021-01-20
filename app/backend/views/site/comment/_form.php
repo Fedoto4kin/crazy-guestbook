@@ -20,8 +20,8 @@ use common\models\Comment;
     <?= $form->field($model, 'updated_at')->textInput(['maxlength' => true, 'readonly'=> true]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([
-                           Comment::STATUS_HIDE  => Comment::getStatus( Comment::STATUS_HIDE),
-                           Comment::STATUS_SHOW  => Comment::getStatus( Comment::STATUS_SHOW),
+                           Comment::STATUS_HIDE  => Comment::getStatus(Comment::STATUS_HIDE),
+                           Comment::STATUS_SHOW  => Comment::getStatus(Comment::STATUS_SHOW),
 
         ]); ?>
 

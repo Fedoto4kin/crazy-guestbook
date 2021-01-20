@@ -20,11 +20,11 @@ $this->title = 'Comments';
             <th>COMMENT</th>
             <th colspan="2">ACTIONS</th>
         </tr>
-        <? foreach ($comments as $comment ): ?>
+        <?php foreach ($comments as $comment): ?>
               <?= $this->render('comment/_commentrow', [
                 'comment' => $comment,
                 ]) ?>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </table>
 </div>
 <script type="application/javascript">
