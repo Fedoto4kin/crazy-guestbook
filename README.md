@@ -40,7 +40,7 @@ sudo docker-compose build
 ```
 * Run containers
 ```sh
-sudo docker-compose up -d
+sudo docker-compose up -d   
 ```
 That's over with the environment. 
 Next, we start to deploy the application.
@@ -92,7 +92,7 @@ That's almost the end.
 
 ### Tests (Optional)
 
-TODO: Fix tests!
+TODO: Add tests!
 
 
 ### Usage 
