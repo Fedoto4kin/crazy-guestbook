@@ -13,6 +13,13 @@ $this->title = 'Comments';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <table class="table-bordered table" id="comments-table">
+        <tr>
+            <th>#ID</th>
+            <th>STATUS</th>
+            <th>IP ADDRESS</th>
+            <th>COMMENT</th>
+            <th colspan="2">ACTIONS</th>
+        </tr>
         <? foreach ($comments as $comment ): ?>
               <?= $this->render('comment/_commentrow', [
                 'comment' => $comment,
@@ -29,7 +36,7 @@ $this->title = 'Comments';
             json_data = JSON.parse(e.data);
             $.get('<?= Url::to(['site/view']); ?>',  { id: json_data.id }).done(
                 function(data) {
-                    $('#comments-table tr:first').before(data);
+                    $('#comments-table tr:first').after(data);
                 }
             );
         };

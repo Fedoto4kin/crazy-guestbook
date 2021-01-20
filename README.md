@@ -75,7 +75,7 @@ if you run this docker images, it must be the same like this:
 
 ```
 
-* And finally, run migrations and create database tables
+* Run migrations and create database tables
 ```sh
 ./yii migrate
 ```
@@ -83,15 +83,11 @@ First migration, as well, will create the administrator user called admin with a
 
 
 That's almost the end.
-The finish step: run the websocker server.
+* The finish step: run the websocker server. This case it's demonized.
 
 ```sh
 ./yii server/start > /dev/null 2>&1 & 
 ```
-This case it's demonized.
-
-* Now you can see Front-end: http://127.0.0.1:8100 and Administration area http://127.0.0.1:8100/admin.
-You can log in  Administration area under admin user created with first migration.
 
 
 ### Tests (Optional)
@@ -101,3 +97,7 @@ TODO: Fix tests!
 
 ### Usage 
 
+Front-end: http://127.0.0.1:8100
+
+Administration area http://127.0.0.1:8100/admin <br>
+*You can log in Administration area under admin user created with first migration*
