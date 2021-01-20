@@ -1,20 +1,19 @@
 <?php
-namespace frontend\tests\acceptance;
 
-use frontend\tests\AcceptanceTester;
-use yii\helpers\Url;
+namespace frontend\tests\functional;
+
+use frontend\tests\FunctionalTester;
 
 class HomeCest
 {
-    public function checkHome(AcceptanceTester $I)
+    public function checkOpen(FunctionalTester $I)
     {
-        $I->amOnPage(Url::toRoute('/site/index'));
-        $I->see('My Application');
-
+        $I->amOnPage(\Yii::$app->homeUrl);
+        $I->see('My Crazy Guestbook ');
         $I->seeLink('About');
         $I->click('About');
-        $I->wait(2); // wait for page to be opened
-
-        $I->see('This is the About page.');
+        $I->see('About');
+        $I->seeLink('Add new comment');
+        $I->see('Add new comment');
     }
 }

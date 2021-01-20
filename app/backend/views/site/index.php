@@ -43,6 +43,10 @@ $this->title = 'Comments';
         conn.onopen = function(e) {
             console.log("Connection established!");
         };
+        conn.onclose = function(e) {
+            alert('Web socket close connection!');
+        };
+
     });
 
 

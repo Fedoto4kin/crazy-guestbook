@@ -41,6 +41,7 @@ class Comment extends ActiveRecord
      */
     public function rules(): array
     {
+        //TODO: Add captcha for frontend only
         return [
             [['name', 'subject', 'body', 'ip'],  'required'],
             ['name', 'match', 'pattern' => '/^[0-9\s\wА-я]/i'],
@@ -93,7 +94,7 @@ class Comment extends ActiveRecord
 
     public function sendToSocket() {
 
-        //TODO: Catch no connection
+        //TODO: Make dependency injection for WebSocket\Client;
         $socket = sprintf("ws://%s:%s", self::SOCKET_ADDR, self::SOCKET_PORT);
         $client = new Client($socket);
         $client->send(json_encode($this->getAttributes()));

@@ -69,7 +69,11 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                $model->sendToSocket();
+                try {
+                    $model->sendToSocket();
+                } catch (\Exception $e) {
+                    Yii::error('Cannot connect to socket');
+                }
                 Yii::$app->session->setFlash('success', 'Thank you for post your comment. We will publish it after moderating you as soon as possible.');
                 return $this->refresh();
             } else {
