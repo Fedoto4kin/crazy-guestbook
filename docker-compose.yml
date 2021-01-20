@@ -1,0 +1,46 @@
+version: '2.2'
+services:
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8100:80"
+    volumes:
+      - ./images/nginx/guestbook.conf:/etc/nginx/conf.d/default.conf
+      - ./app:/var/www
+      - ./logs:/var/log/nginx
+    networks:
+      - yii-doc-net
+  
+  phpfpm:
+    container_name: phpfpm
+    ports:
+      - "8080:8080"
+    build: ./images/phpfpm
+    volumes:
+      - ./app:/var/www
+    networks:
+      - yii-doc-net
+
+  db:
+    image: postgres
+    container_name: pg_db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=guestbook
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    volumes:
+      - ./db:/var/lib/postgres/
+    networks:
+      - yii-doc-net
+
+
+
+networks:
+  yii-doc-net:
+    driver: bridge
+
+
