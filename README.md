@@ -1,7 +1,7 @@
 # Crazy guestbook
 <!-- ABOUT -->
 
-This application is Yii2 advanced paltform build code-test according the followed task
+This application is a Yii2 advanced platform build code-test according to the followed task
 
 > You need to create a simple commenting system (front-end and administration area) with the Yii framework:
 >
@@ -40,7 +40,7 @@ sudo docker-compose build
 ```
 * Run containers
 ```sh
-sudo docker-compose up
+sudo docker-compose up -d
 ```
 That's over with the environment. 
 Next, we start to deploy the application.
