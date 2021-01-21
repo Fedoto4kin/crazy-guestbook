@@ -92,8 +92,7 @@ That's almost the end.
 
 ### Tests (Optional)
 
-TODO: Add tests!
-
+Coming... 
 
 ### Usage 
 
@@ -101,3 +100,12 @@ Front-end: http://127.0.0.1:8100
 
 Administration area http://127.0.0.1:8100/admin <br>
 *You can log in Administration area under admin user created with first migration*
+
+
+### TO DO LIST
+
+* Tests: unit, functional, acceptance
+* Docker user issue
+* xdebug + docker
+
+
