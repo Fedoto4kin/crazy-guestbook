@@ -29,11 +29,18 @@ class Comment extends ActiveRecord
     public const STATUS_HIDE = 0;
     public const STATUS_SHOW = 1;
 
+    public const EVENT_NEW_COMMENT = 'new-comment';
 
     private static $_status = [
         self::STATUS_HIDE => 'Hide',
         self::STATUS_SHOW => 'Show'
    ];
+
+    public function init()
+    {
+      $this->on(self::EVENT_NEW_COMMENT, [$this, 'sendToSocket']);
+      parent::init();
+    }
 
 
     /**
@@ -96,9 +103,16 @@ class Comment extends ActiveRecord
 
         //TODO: Make dependency injection for WebSocket\Client;
         $socket = sprintf("ws://%s:%s", self::SOCKET_ADDR, self::SOCKET_PORT);
-        $client = new Client($socket);
-        $client->send(json_encode($this->getAttributes()));
-
+        $msg = json_encode(
+                    ['comment' => $this->getAttributes(),
+                    'action' => 'push' ]
+                );
+        try {
+            $client = new Client($socket);
+            $client->send($msg);
+        } catch (\Exception $e) {
+            Yii::error('Cannot connect to socket');
+        }
     }
 
 }

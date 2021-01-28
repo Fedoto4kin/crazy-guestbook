@@ -48,6 +48,7 @@ $path = $this->assetManager->getBundle(AppAsset::class)->baseUrl;
     $(document).ready(function() {
         var conn = new WebSocket('ws://127.0.0.1:8080');
         conn.onmessage = function(e) {
+            console.log(e.data)
             json_data = JSON.parse(e.data);
             $.get('<?= Url::to(['site/view']); ?>',  { id: json_data.id }).done(
                 function(data) {

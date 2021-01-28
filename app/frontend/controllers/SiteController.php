@@ -59,7 +59,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays contact page.
+     * Displays add comment page.
      *
      * @return mixed
      */
@@ -69,11 +69,7 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                try {
-                    $model->sendToSocket();
-                } catch (\Exception $e) {
-                    Yii::error('Cannot connect to socket');
-                }
+                $model->trigger(Comment::EVENT_NEW_COMMENT);
                 Yii::$app->session->setFlash('success', 'Thank you for post your comment. We will publish it after moderating you as soon as possible.');
                 return $this->refresh();
             } else {

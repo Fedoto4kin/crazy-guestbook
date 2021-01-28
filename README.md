@@ -86,7 +86,7 @@ That's almost the end.
 * The finish step: run the websocker server. This case it's demonized.
 
 ```sh
-./yii server/start > /dev/null 2>&1 & 
+nohup ./yii server/start > /dev/null 2>&1 & 
 ```
 
 

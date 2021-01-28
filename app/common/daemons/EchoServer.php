@@ -2,22 +2,31 @@
 
 namespace common\daemons;
 
-use consik\yii2websocket\events\WSClientMessageEvent;
 use consik\yii2websocket\WebSocketServer;
+use Ratchet\ConnectionInterface;
 
 
 class EchoServer extends WebSocketServer
 {
 
-    public function init()
+    protected function getCommand(ConnectionInterface $from, $msg)
     {
-        parent::init();
+        $request = json_decode($msg, true);
+        return !empty($request['action']) ? $request['action'] : parent::getCommand($from, $msg);
+    }
 
-        $this->on(self::EVENT_CLIENT_MESSAGE, function (WSClientMessageEvent $e) {
+    public function commandPush(ConnectionInterface $sender, $msg)
+    {
+        $request = json_decode($msg, true);
+
+        //TODO: check secret key
+
+        if (!empty($request['comment']) && $data = $request['comment']) {
             foreach ($this->clients as $client) {
-                 $client->send( $e->message );
+                if ($client != $sender)
+                    $client->send(json_encode($data));
             }
-        });
+        }
     }
 
 }
