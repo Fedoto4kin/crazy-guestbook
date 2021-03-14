@@ -52,7 +52,7 @@ sudo docker exec -it phpfpm /bin/bash
 *Be sure, you are in project root (/var/www)*
 * Run composer for install Yii and dependencies.
 ```sh
-composer update
+composer install
 ```
 * Initialize the Yii project:
 ```sh
