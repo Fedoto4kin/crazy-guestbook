@@ -47,7 +47,7 @@ Next, we start to deploy the application.
 
 * Enter into the container which serves an app, php-fpm.
 ```sh
-sudo docker exec -it phpfpm /bin/bash
+sudo docker exec -it guestbook_phpfpm /bin/bash
 ```
 *Be sure, you are in project root (/var/www)*
 * Run composer for install Yii and dependencies.
