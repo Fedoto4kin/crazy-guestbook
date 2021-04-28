@@ -96,9 +96,9 @@ Coming...
 
 ### Usage 
 
-Front-end: http://127.0.0.1:8100
+Front-end: http://127.0.0.1
 
-Administration area http://127.0.0.1:8100/admin <br>
+Administration area http://127.0.0.1/admin <br>
 *You can log in Administration area under admin user created with first migration*
 
 
