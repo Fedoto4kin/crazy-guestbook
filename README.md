@@ -62,14 +62,17 @@ composer install
 *When you run docker as root, 
 the files generated into container may be not accessible for not-root user.*
 
-* Configure your DB connection 
-if you run this docker images, it must be the same like this:
+* Configure your DB connection
+
+`Note: if you run docker as root(sudo), you may need to change access rights for this file for edit `
+
+if you run this docker images, it must be the same as this:
 ```php
 # app/common/config/main-local.php
 
   'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'pgsql:host=pg_db;port=5432;dbname=guestbook',
+            'dsn' => 'pgsql:host=guestbook_db;port=5432;dbname=guestbook',
             'username' => 'admin',
             'password' => '12345',
             'charset' => 'utf8',
