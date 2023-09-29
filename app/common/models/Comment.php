@@ -24,14 +24,14 @@ use WebSocket\Client;
 class Comment extends ActiveRecord
 {
     private const SOCKET_PORT = '8080';
-    private const SOCKET_ADDR = '127.0.0.1';
+    private const SOCKET_IP = '127.0.0.1';
 
     public const STATUS_HIDE = 0;
     public const STATUS_SHOW = 1;
 
     public const EVENT_NEW_COMMENT = 'new-comment';
 
-    private static $_status = [
+    private static array $_status = [
         self::STATUS_HIDE => 'Hide',
         self::STATUS_SHOW => 'Show'
    ];
@@ -41,7 +41,6 @@ class Comment extends ActiveRecord
       $this->on(self::EVENT_NEW_COMMENT, [$this, 'sendToSocket']);
       parent::init();
     }
-
 
     /**
      * {@inheritdoc}
@@ -61,6 +60,7 @@ class Comment extends ActiveRecord
     public function beforeValidate(): bool
     {
         $this->ip =  Yii::$app->request->userIP;
+
         return parent::beforeValidate();
     }
 
@@ -72,12 +72,12 @@ class Comment extends ActiveRecord
         return '{{%comment}}';
     }
 
-
     public static function getStatus(int $status_id): string
     {
         if (isset(self::$_status[$status_id])) {
             return self::$_status[$status_id];
         }
+        throw new \ValueError('Wrong status');
     }
 
     public static function statusList(): array
@@ -99,10 +99,10 @@ class Comment extends ActiveRecord
         ];
     }
 
-    public function sendToSocket() {
-
+    public function sendToSocket()
+    {
         //TODO: Make dependency injection for WebSocket\Client;
-        $socket = sprintf("ws://%s:%s", self::SOCKET_ADDR, self::SOCKET_PORT);
+        $socket = sprintf("ws://%s:%s", self::SOCKET_IP, self::SOCKET_PORT);
         $msg = json_encode(
                     ['comment' => $this->getAttributes(),
                     'action' => 'push' ]

@@ -71,11 +71,11 @@ class SiteController extends Controller
             if ($model->save()) {
                 $model->trigger(Comment::EVENT_NEW_COMMENT);
                 Yii::$app->session->setFlash('success', 'Thank you for post your comment. We will publish it after moderating you as soon as possible.');
-                return $this->refresh();
             } else {
                 Yii::$app->session->setFlash('error', 'Cannot save into DB. Please, try later.');
-                return $this->refresh();
             }
+
+            return $this->refresh();
         } else {
             return $this->render('comment', [
                 'model' => $model,

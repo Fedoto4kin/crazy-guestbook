@@ -118,6 +118,7 @@ class SiteController extends Controller
     public function actionView($id)
     {
         $model = Comment::findOne($id);
+
         return $this->renderPartial(
             'comment/_commentrow',
             ['comment' => $model]
@@ -132,6 +133,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+
         return $this->goHome();
     }
 }

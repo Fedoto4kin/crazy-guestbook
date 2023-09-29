@@ -36,31 +36,25 @@ cd crazy-guestbook
 ```
 * Build docker images
 ```sh
-sudo docker-compose build
+docker-compose build
 ```
 * Run containers
 ```sh
-sudo docker-compose up -d   
+docker-compose up -d   
 ```
 That's over with the environment. 
 Next, we start to deploy the application.
 
-* Enter into the container which serves an app, php-fpm.
+* Enter into the container which serves an app, php-fpm. Run composer for install Yii and dependencies.
 ```sh
-sudo docker exec -it guestbook_phpfpm /bin/bash
-```
-*Be sure, you are in project root (/var/www)*
-* Run composer for install Yii and dependencies.
-```sh
-composer install
+docker exec -it guestbook_phpfpm composer install
 ```
 * Initialize the Yii project:
 ```sh
-./init
+docker exec -it guestbook_phpfpm ./init
 ```
 
-*When you run docker as root, 
-the files generated into container may be not accessible for not-root user.*
+*When you run docker as root, the files generated into container may be not accessible for not-root user.*
 
 * Configure your DB connection
 
@@ -82,7 +76,7 @@ if you run this docker images, it must be the same as this:
 
 * Run migrations and create database tables
 ```sh
-./yii migrate
+docker exec -it guestbook_phpfpm ./yii migrate
 ```
 First migration, as well, will create the administrator user called admin with a very secret password 'admin'. 
 
@@ -91,7 +85,7 @@ That's almost the end.
 * The finish step: run the websocker server. This case it's demonized.
 
 ```sh
-nohup ./yii server/start > /dev/null 2>&1 & 
+docker exec -it guestbook_phpfpm nohup ./yii server/start > /dev/null 2>&1 & 
 ```
 
 
@@ -110,6 +104,7 @@ Administration area http://127.0.0.1/admin <br>
 ### TO DO LIST
 
 * Tests: unit, functional, acceptance
+* Use room for socket 
 * Docker user issue
 * xdebug + docker
 
